@@ -1,7 +1,6 @@
 import NextAuth from "next-auth";
-import GithubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
-import log from "logging-service";
+import GithubProvider from "next-auth/providers/github";
 
 export const authOptions = {
   // Configure one or more authentication providers
@@ -28,11 +27,6 @@ export const authOptions = {
         // e.g. return { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
         // You can also use the `req` object to obtain additional parameters
         // (i.e., the request IP address)
-        // const res = await fetch("/your/endpoint", {
-        //   method: "POST",
-        //   body: JSON.stringify(credentials),
-        //   headers: { "Content-Type": "application/json" },
-        // });
         console.log(credentials, "credentials");
         const user = {
           username: "tushar",
@@ -49,17 +43,6 @@ export const authOptions = {
     }),
     // ...add more providers here
   ],
-  // logger: {
-  //   error(code, metadata) {
-  //     log.error(code, metadata);
-  //   },
-  //   warn(code) {
-  //     log.warn(code);
-  //   },
-  //   debug(code, metadata) {
-  //     log.debug(code, metadata);
-  //   },
-  // },
   callbacks: {
     async jwt({ token, account }) {
       // Persist the OAuth access_token to the token right after signin
