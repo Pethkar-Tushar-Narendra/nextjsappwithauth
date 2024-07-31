@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github";
+import log from "logging-service";
 
 export const authOptions = {
   // Configure one or more authentication providers
@@ -10,6 +11,17 @@ export const authOptions = {
     }),
     // ...add more providers here
   ],
+  logger: {
+    error(code, metadata) {
+      log.error(code, metadata);
+    },
+    warn(code) {
+      log.warn(code);
+    },
+    debug(code, metadata) {
+      log.debug(code, metadata);
+    },
+  },
   callbacks: {
     async jwt({ token, account }) {
       // Persist the OAuth access_token to the token right after signin
