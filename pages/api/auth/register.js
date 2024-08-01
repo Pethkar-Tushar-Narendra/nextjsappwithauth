@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
-import { hashPassword } from "../../../../Components/Functions";
-import connectMongoDB from "../../../../libs/mongodb";
-import Users from "../../../../models/users";
+import { hashPassword } from "../../../Components/Functions";
+import connectMongoDB from "../../../libs/mongodb";
+import Users from "../../../models/users";
 
 // Get list will provide list of movies by checking request data
 export async function POST(request) {

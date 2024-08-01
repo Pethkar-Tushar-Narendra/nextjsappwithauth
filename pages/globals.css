@@ -5,9 +5,11 @@
 input {
   border: 1px solid black;
 }
+
 .login_page_backDrop {
   background-image: url("../libs/images/nextflixBackgroundImage.jpg");
 }
+
 .translate-100 {
   transform: translateX(-55%);
 }
