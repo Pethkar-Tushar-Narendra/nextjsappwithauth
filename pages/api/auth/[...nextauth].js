@@ -1,9 +1,16 @@
+import { checkPassword } from "../../../Components/Functions";
+import connectMongoDB from "../../../libs/mongodb";
+import Users from "../../../models/users";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GithubProvider from "next-auth/providers/github";
 
 export const authOptions = {
   // Configure one or more authentication providers
+  pages: {
+    newUser: "/auth/register",
+    signIn: "/login",
+  },
   providers: [
     GithubProvider({
       clientId: process.env.GITHUB_ID,
@@ -16,47 +23,51 @@ export const authOptions = {
       // You can specify whatever fields you are expecting to be submitted.
       // e.g. domain, username, password, 2FA token, etc.
       // You can pass any HTML attribute to the <input> tag through the object.
-      credentials: {
-        username: { label: "Username", type: "text", placeholder: "jsmith" },
-        password: { label: "Password", type: "password" },
-      },
-      async authorize(credentials, req) {
-        // You need to provide your own logic here that takes the credentials
-        // submitted and returns either a object representing a user or value
-        // that is false/null if the credentials are invalid.
-        // e.g. return { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
-        // You can also use the `req` object to obtain additional parameters
-        // (i.e., the request IP address)
-        console.log(credentials, "credentials");
-        const user = {
-          username: "tushar",
-          password: "raj",
-        };
 
-        // If no error and we have user data, return it
-        if (res.ok && user) {
-          return user;
-        }
+      async authorize(credentials, req) {
+        try {
+          await connectMongoDB();
+          const userFromDataBase = await Users.findOne({
+            userName: credentials?.userName,
+          });
+          if (
+            await checkPassword(
+              credentials?.password || "",
+              userFromDataBase.password
+            )
+          ) {
+            // Any object returned will be saved in `user` property of the JWT
+            return {
+              id: userFromDataBase?._id,
+              name: userFromDataBase?.userName,
+              email: userFromDataBase?.email,
+              watchlist: userFromDataBase?.watchlist,
+              favourites: userFromDataBase?.favourites,
+            };
+          } else {
+            return null;
+          }
+        } catch (error) {}
         // Return null if user data could not be retrieved
         return null;
       },
     }),
     // ...add more providers here
   ],
-  callbacks: {
-    async jwt({ token, account }) {
-      // Persist the OAuth access_token to the token right after signin
-      if (account) {
-        token.accessToken = account.access_token;
-      }
-      return token;
-    },
-    async session({ session, token, user }) {
-      // Send properties to the client, like an access_token from a provider.
-      session.accessToken = token.accessToken;
-      return session;
-    },
-  },
+  // callbacks: {
+  //   async jwt({ token, account }) {
+  //     // Persist the OAuth access_token to the token right after signin
+  //     if (account) {
+  //       token.accessToken = account.access_token;
+  //     }
+  //     return token;
+  //   },
+  //   async session({ session, token, user }) {
+  //     // Send properties to the client, like an access_token from a provider.
+  //     session.accessToken = token.accessToken;
+  //     return session;
+  //   },
+  // },
 };
 
 export default NextAuth(authOptions);

@@ -1,15 +1,14 @@
-import Image from "next/image";
 import { Inter } from "next/font/google";
-import Component from "@/Component/Login-btn";
-import AccessToken from "@/Component/Accesstoken";
+import Login from "./login/Login";
+import Home from "./Home";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+export default function BaseComponent() {
   return (
     <>
-      <Component />
-      <AccessToken />
+      <Home />
+      <Login />
     </>
   );
 }
