@@ -7,8 +7,8 @@ const inter = Inter({ subsets: ["latin"] });
 export default function BaseComponent() {
   return (
     <>
-      <Home />
       <Login />
+      {/* <Home /> */}
     </>
   );
 }
