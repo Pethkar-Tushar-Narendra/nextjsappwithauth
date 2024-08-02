@@ -1,4 +1,4 @@
-import { getServerSession } from "next-auth";
+import { getSession } from "next-auth/react";
 import {
   getAll,
   getByGenreId,
@@ -20,7 +20,6 @@ import Users from "../../models/users";
 import { authOptions } from "./auth/[...nextauth].js";
 
 export default async function handler(request, res) {
-  // console.log(request.query, "request");
   if (request.method === "POST") {
   } else {
     const searchParams = request.query;
@@ -31,8 +30,8 @@ export default async function handler(request, res) {
     let userObject;
     let session;
     try {
-      session = await getServerSession(authOptions);
-
+      session = await getSession();
+      console.log(session, "session on server side");
       await connectMongoDB();
 
       userObject = await Users.findOne({
@@ -223,7 +222,7 @@ async function POST(request) {
       movieId,
       fetch,
     } = await request.json();
-    const session = await getServerSession(authOptions);
+    const session = await getSession(authOptions);
     await connectMongoDB();
 
     if (review && user) {
