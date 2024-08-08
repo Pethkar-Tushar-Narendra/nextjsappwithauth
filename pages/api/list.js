@@ -31,6 +31,7 @@ export default async function handler(request, res) {
     let session;
     session = await getSession();
 
+    console.log("happening till now", searchParams["name"]);
     try {
       await connectMongoDB();
 
@@ -51,6 +52,7 @@ export default async function handler(request, res) {
     const watchListParam = searchParams["watchList"] || "";
     const favouritesParam = searchParams["favourites"] || "";
     const id = searchParams["id"] || "";
+
     try {
       userReviews = await RatingAndReviews.find({ fetch: fetch, movieId: id });
     } catch (error) {

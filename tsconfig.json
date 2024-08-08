@@ -17,7 +17,16 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "pages/register/Register.jsx"
+    "pages/register/Register.jsx",
+    "pages/favourites/index.jsx",
+    "pages/favourites/Favourites.jsx",
+    "pages/movieTrailer/[id]/index.jsx",
+    "Components/YoutubePlayer.jsx",
+    "pages/movie/[id]/index.jsx",
+    "Components/Details.jsx",
+    "Components/ShowDetails.jsx",
+    "Components/ReviewCard.jsx",
+    "Components/AddReview.jsx"
   ],
   "exclude": ["node_modules"]
 }

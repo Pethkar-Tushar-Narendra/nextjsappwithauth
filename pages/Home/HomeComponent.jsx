@@ -47,8 +47,8 @@ const HomeComponent = () => {
           genre_id: genreSelected.map((item) => item.id).toString(),
         }
       : {};
-
   const session = useSession();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -68,25 +68,30 @@ const HomeComponent = () => {
         console.log(error, "error");
       }
     };
-    if (session.data) {
+    if (session?.data?.user) {
       fetchData();
     }
   }, [category, fetch, page, genreSelected, reRender, session]);
-
   useEffect(() => {
     const fetchGenre = async () => {
       try {
         const response = await axios.get("/api/list", {
-          params: { fetch: fetch, getGenre: true, page: 1 },
+          params: {
+            fetch: fetch,
+            getGenre: true,
+            page: 1,
+            name: session?.data?.user?.name || "dev user",
+          },
         });
         setGenres(response?.data?.genres || []);
       } catch (error) {
         console.log(error, "error");
       }
     };
-    fetchGenre();
-  }, [fetch]);
-
+    if (session?.data) {
+      fetchGenre();
+    }
+  }, [fetch, session]);
   const handlerCategoryChange = (e) => {
     if (e !== "upcoming" || fetch === "movie") {
       setCategory(e);

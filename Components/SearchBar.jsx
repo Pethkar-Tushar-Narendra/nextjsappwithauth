@@ -3,6 +3,7 @@ import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import InputFields from "./InputFields";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 const SearchBar = ({ fetch }) => {
   const [value, setValue] = useState("");
@@ -24,7 +25,7 @@ const SearchBar = ({ fetch }) => {
   }, [wrapperRef]);
 
   const deboucedValue = useDebounce(value, 500);
-
+  const session = useSession();
   useEffect(() => {
     const fetchMovies = async () => {
       try {
@@ -34,6 +35,7 @@ const SearchBar = ({ fetch }) => {
             search: "title",
             query: deboucedValue,
             page: 1,
+            name: session?.data?.user?.name || "dev user",
           },
         });
         setData(
@@ -49,7 +51,7 @@ const SearchBar = ({ fetch }) => {
     if (deboucedValue?.length > 0) {
       fetchMovies();
     }
-  }, [deboucedValue]);
+  }, [deboucedValue, session]);
 
   return (
     <div ref={wrapperRef} className="relative h-100">
