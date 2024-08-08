@@ -22,20 +22,20 @@ import { authOptions } from "./auth/[...nextauth].js";
 export default async function handler(request, res) {
   if (request.method === "POST") {
   } else {
-    const searchParams = request.query;
+    const searchParams = await request.query;
     let watchList = [];
     let favourites = [];
     let reviews;
     let userReviews = [];
     let userObject;
     let session;
+    session = await getSession();
+
     try {
-      session = await getSession();
-      console.log(session, "session on server side");
       await connectMongoDB();
 
       userObject = await Users.findOne({
-        userName: session?.user?.name,
+        userName: searchParams["name"],
       });
       watchList = [...userObject?.watchlist];
       favourites = [...userObject?.favourites];
@@ -44,13 +44,13 @@ export default async function handler(request, res) {
       return res.json({ error }, { status: 201 });
     }
 
-    const fetch = searchParams.get("fetch");
-    const page = searchParams.get("page") || "1";
-    const getGenre = searchParams.get("getGenre");
-    const getDetail = searchParams.get("getDetail");
-    const watchListParam = searchParams.get("watchList");
-    const favouritesParam = searchParams.get("favourites");
-    const id = searchParams.get("id");
+    const fetch = searchParams["fetch"];
+    const page = searchParams["page"] || "1";
+    const getGenre = searchParams["getGenre"] || "";
+    const getDetail = searchParams["getDetail"] || "";
+    const watchListParam = searchParams["watchList"] || "";
+    const favouritesParam = searchParams["favourites"] || "";
+    const id = searchParams["id"] || "";
     try {
       userReviews = await RatingAndReviews.find({ fetch: fetch, movieId: id });
     } catch (error) {
@@ -70,19 +70,18 @@ export default async function handler(request, res) {
         return res.json({ error }, { status: 201 });
       }
     }
-    if (!searchParams.keys().next().value || !fetch) {
+
+    if (Object.keys(searchParams).length === 0 || !fetch) {
       try {
         return res.json({ message: "invalid query" }, { status: 201 });
       } catch (e) {
         return res.json({ error: e }, { status: 201 });
       }
     } else {
-      if (Array.from(searchParams.entries()).length === 2) {
+      console.log("running something", Object.keys(searchParams).length);
+      if (Object.keys(searchParams).length === 3) {
         try {
-          const response = await getAll(
-            searchParams.get("fetch") || "movie",
-            page
-          );
+          const response = await getAll(searchParams["fetch"] || "movie", page);
           return res.json(
             { ...response?.data, watchList, favourites, userObject },
             { status: 201 }
@@ -91,8 +90,8 @@ export default async function handler(request, res) {
           return res.json({ error: e }, { status: 201 });
         }
       }
-      const category = searchParams.get("category");
-      const search = searchParams.get("search");
+      const category = searchParams["category"];
+      const search = searchParams["search"];
       if (category) {
         if (category === "trending") {
           try {
@@ -132,7 +131,7 @@ export default async function handler(request, res) {
           try {
             const response = await getByTitle(
               fetch || "movie",
-              searchParams.get("query") || ""
+              searchParams["query"] || ""
             );
             return res.json(
               { ...response?.data, watchList, favourites, userObject },
@@ -145,7 +144,7 @@ export default async function handler(request, res) {
         if (search === "genres") {
           try {
             const response = await getByGenreId(
-              searchParams.get("genre_id") || "",
+              searchParams["genre_id"] || "",
               fetch,
               page
             );
@@ -160,7 +159,7 @@ export default async function handler(request, res) {
         if (search === "keywords") {
           try {
             const response = await getMoviesByKeywordId(
-              searchParams.get("keywordId") || ""
+              searchParams["keywordId"] || ""
             );
             return res.json(
               { ...response?.data, watchList, favourites, userObject },

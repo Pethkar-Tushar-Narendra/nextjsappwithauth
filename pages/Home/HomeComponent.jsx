@@ -1,4 +1,5 @@
 "use client";
+import { useSession } from "next-auth/react";
 import ModalPopup from "../../Components/ModalPopup";
 import NavBar from "../../Components/NavBar";
 import ProductCard from "../../Components/ProductCard";
@@ -47,6 +48,7 @@ const HomeComponent = () => {
         }
       : {};
 
+  const session = useSession();
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -56,6 +58,7 @@ const HomeComponent = () => {
             ...categorySelected,
             page,
             ...genreCallingParams,
+            name: session?.data?.user?.name || "dev user",
           },
         });
         setMaxPageNo(response?.data?.total_pages);
@@ -65,8 +68,10 @@ const HomeComponent = () => {
         console.log(error, "error");
       }
     };
-    fetchData();
-  }, [category, fetch, page, genreSelected, reRender]);
+    if (session.data) {
+      fetchData();
+    }
+  }, [category, fetch, page, genreSelected, reRender, session]);
 
   useEffect(() => {
     const fetchGenre = async () => {

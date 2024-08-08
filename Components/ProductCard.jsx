@@ -8,7 +8,7 @@ const ProductCard = ({ item, fetch, watchlist, favourites, reRender }) => {
   return (
     <>
       {item?.poster_path ? (
-        <div className="w-full h-full overflow-hidden">
+        <div className="w-full h-full overflow-hidden flex items-center justify-center">
           <img
             style={{
               width: "150px",
