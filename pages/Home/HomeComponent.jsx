@@ -1,12 +1,11 @@
 "use client";
+import axios from "axios";
 import { useSession } from "next-auth/react";
-import ModalPopup from "../../Components/ModalPopup";
+import Link from "next/link";
+import React, { useEffect, useState } from "react";
 import NavBar from "../../Components/NavBar";
 import ProductCard from "../../Components/ProductCard";
 import SearchBar from "../../Components/SearchBar";
-import axios from "axios";
-import Link from "next/link";
-import React, { useEffect, useState } from "react";
 
 // interface movies {
 //   page: number;
@@ -36,7 +35,6 @@ const HomeComponent = () => {
   const [genreSelected, setGenreSelected] = useState([]);
   const [category, setCategory] = useState("");
   const [reRender, setReRender] = useState(true);
-  const [openDetails, setOpenDetails] = useState(false);
   const categorySelected = category === "" ? {} : { category };
   const [page, setPage] = useState(1);
   const [maxPageNo, setMaxPageNo] = useState();
@@ -110,16 +108,11 @@ const HomeComponent = () => {
     setPage(1);
   };
 
-  const modalHandler = () => {
-    setOpenDetails((prev) => !prev);
-  };
-
   return (
     <div className="w-screen h-screen overflow-x-hidden bg-gray-900 text-white">
       <NavBar />
       <div>
         <div className="flex p-4 justify-between flex-col sm:flex-col md:flex-row gap-2">
-          <ModalPopup open={openDetails} onChange={modalHandler} />
           <div className="flex gap-2">
             <button
               className={`border border-white p-2 rounded hover:bg-red-500 ${
