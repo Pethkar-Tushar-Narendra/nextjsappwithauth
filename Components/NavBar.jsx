@@ -58,10 +58,10 @@ const NavBar = () => {
           </div>
         ) : (
           <div className="flex gap-2 px-2">
-            <button className="hover:underline  h-fit">
+            <button className="hover:underline">
               <Link href={"/watchlist"}>WatchList</Link>
             </button>
-            <button className="hover:underline h-fit ">
+            <button className="hover:underline">
               <Link href={"/favourites"}>Favourites</Link>
             </button>
             <Logout className="hover:underline" />
