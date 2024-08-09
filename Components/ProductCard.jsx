@@ -39,7 +39,7 @@ const ProductCard = ({ item, fetch, watchlist, favourites, reRender }) => {
         </div>
         <div className="flex gap-2">
           <button
-            className="relative group w-6 h-6 flex items-center justify-center "
+            className="relative group w-6 h-6  h-fit flex items-center justify-center "
             onClick={async (e) => {
               e.preventDefault();
               await addWatchListHandler(item, true, false, !presentInWatchList);

@@ -23,7 +23,7 @@ const NavBar = () => {
         {width < 768 ? (
           <div className="relative">
             <button
-              className="kabab-menu-button py-1 px-2 bg-gray-200 rounded-full"
+              className="kabab-menu-button py-1  h-fit px-2 bg-gray-200 rounded-full"
               onClick={() => setToggleMenu((prev) => !prev)}
             >
               <svg
@@ -55,10 +55,10 @@ const NavBar = () => {
           </div>
         ) : (
           <div className="flex gap-2 px-2">
-            <button className="hover:underline">
+            <button className="hover:underline  h-fit">
               <Link href={"/watchlist"}>WatchList</Link>
             </button>
-            <button className="hover:underline">
+            <button className="hover:underline h-fit ">
               <Link href={"/favourites"}>Favourites</Link>
             </button>
             <Logout className="hover:underline" />

@@ -128,7 +128,7 @@ const HomeComponent = () => {
               Movies
             </button>
             <button
-              className={`border border-white p-2 rounded hover:bg-red-500 ${
+              className={`border border-white p-2 rounded h-fit hover:bg-red-500 ${
                 fetch === "tv" && "bg-red-500"
               }`}
               onClick={() => {
