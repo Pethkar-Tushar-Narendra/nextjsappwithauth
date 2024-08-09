@@ -7,12 +7,15 @@ import useWindowSize from "./useWindowSize";
 
 const NavBar = () => {
   const { width } = useWindowSize();
+
   const [toggleMenu, setToggleMenu] = useState(false);
+
   const session = useSession();
 
   const username = session?.data?.user?.name;
+
   return (
-    <div className="w-full px-8 py-4 bg-transparent md:px-4 flex justify-between">
+    <div className="w-full p-4 bg-transparent  flex justify-between">
       <p className="text-4xl font-bold text-red-500" id="title_icon">
         <Link href={"/"}>{width >= 768 ? "Nextflix" : "N"}</Link>
       </p>
