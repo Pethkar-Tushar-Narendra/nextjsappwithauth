@@ -1,9 +1,11 @@
 import React from "react";
 import { addWatchListHandler } from "./ApiCallingFunctions";
+import { useSession } from "next-auth/react";
 
 const ProductCard = ({ item, fetch, watchlist, favourites, reRender }) => {
   const presentInWatchList = watchlist?.find((ele) => ele.id === item.id);
   const presentInFavourites = favourites?.find((ele) => ele.id === item.id);
+  const userName = useSession();
 
   return (
     <>
@@ -30,7 +32,7 @@ const ProductCard = ({ item, fetch, watchlist, favourites, reRender }) => {
         </div>
       )}
       <div className="flex gap-1 justify-start w-full flex-col items-between">
-        <p className="max-w-full md:max-w-36	overflow-hidden text-ellipsis whitespace-nowrap">
+        <p className="max-w-full md:max-w-36 w-full	overflow-hidden text-ellipsis whitespace-nowrap">
           {fetch === "movie" ? item?.original_title : item?.original_name}
         </p>
         <div className="flex justify-between">
@@ -42,7 +44,14 @@ const ProductCard = ({ item, fetch, watchlist, favourites, reRender }) => {
             className="relative group w-6 h-6 flex items-center justify-center "
             onClick={async (e) => {
               e.preventDefault();
-              await addWatchListHandler(item, true, false, !presentInWatchList);
+              await addWatchListHandler(
+                item,
+                true,
+                false,
+                !presentInWatchList,
+                undefined,
+                userName?.data?.user?.name
+              );
               reRender((prev) => !prev);
             }}
           >

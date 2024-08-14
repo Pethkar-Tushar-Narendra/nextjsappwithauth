@@ -18,9 +18,76 @@ import connectMongoDB from "../../libs/mongodb";
 import RatingAndReviews from "../../models/rating";
 import Users from "../../models/users";
 import { authOptions } from "./auth/[...nextauth].js";
+import { getServerSession } from "next-auth";
 
 export default async function handler(request, res) {
   if (request.method === "POST") {
+    try {
+      const {
+        item,
+        watchlist,
+        favourite,
+        add,
+        review,
+        user,
+        rating,
+        movieId,
+        fetch,
+      } = request.body;
+
+      const session = await getSession(authOptions);
+      console.log(session, "session created to server component");
+
+      await connectMongoDB();
+
+      if (review && user) {
+        const newReview = new RatingAndReviews({
+          user,
+          rating,
+          review,
+          userName: user.userName,
+          movieId,
+          fetch,
+        });
+        const userReviews = await newReview.save();
+
+        return res.json(userReviews, { status: 201 });
+      }
+      const updatedDocument = await Users.findOneAndUpdate(
+        {
+          userName: session?.user?.name,
+        },
+        add
+          ? {
+              $push: watchlist
+                ? { watchlist: { ...item } }
+                : favourite
+                ? {
+                    favourites: { ...item },
+                  }
+                : {},
+            }
+          : {
+              $pull: watchlist
+                ? { watchlist: { id: item.id } }
+                : favourite
+                ? {
+                    favourites: { id: item.id },
+                  }
+                : {},
+            },
+        {
+          new: true,
+        }
+      );
+
+      if (!updatedDocument) {
+        throw new Error("Cannot find user.");
+      }
+      return res.json(updatedDocument, { status: 201 });
+    } catch (error) {
+      return res.json({ error }, { status: 201 });
+    }
   } else {
     const searchParams = await request.query;
     let watchList = [];
@@ -28,10 +95,6 @@ export default async function handler(request, res) {
     let reviews;
     let userReviews = [];
     let userObject;
-    let session;
-    session = await getSession();
-
-    console.log("happening till now", searchParams["name"]);
     try {
       await connectMongoDB();
 
@@ -207,71 +270,5 @@ export default async function handler(request, res) {
       }
     }
     return res.json({ message: "invalid request" }, { status: 201 });
-  }
-}
-
-async function POST(request) {
-  try {
-    const {
-      item,
-      watchlist,
-      favourite,
-      add,
-      review,
-      user,
-      rating,
-      movieId,
-      fetch,
-    } = await request.json();
-    const session = await getSession(authOptions);
-    await connectMongoDB();
-
-    if (review && user) {
-      const newReview = new RatingAndReviews({
-        user,
-        rating,
-        review,
-        userName: user.userName,
-        movieId,
-        fetch,
-      });
-      const userReviews = await newReview.save();
-
-      return NextResponse.json(userReviews, { status: 201 });
-    }
-    const updatedDocument = await Users.findOneAndUpdate(
-      {
-        userName: session?.user?.name,
-      },
-      add
-        ? {
-            $push: watchlist
-              ? { watchlist: { ...item } }
-              : favourite
-              ? {
-                  favourites: { ...item },
-                }
-              : {},
-          }
-        : {
-            $pull: watchlist
-              ? { watchlist: { id: item.id } }
-              : favourite
-              ? {
-                  favourites: { id: item.id },
-                }
-              : {},
-          },
-      {
-        new: true,
-      }
-    );
-
-    if (!updatedDocument) {
-      throw new Error("Cannot find user.");
-    }
-    return NextResponse.json(updatedDocument, { status: 201 });
-  } catch (error) {
-    return NextResponse.json({ error }, { status: 201 });
   }
 }

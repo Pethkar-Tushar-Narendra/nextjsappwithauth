@@ -26,7 +26,9 @@
     "Components/Details.jsx",
     "Components/ShowDetails.jsx",
     "Components/ReviewCard.jsx",
-    "Components/AddReview.jsx"
+    "Components/AddReview.jsx",
+    "middleware.js",
+    "Components/Star.jsx"
   ],
   "exclude": ["node_modules"]
 }

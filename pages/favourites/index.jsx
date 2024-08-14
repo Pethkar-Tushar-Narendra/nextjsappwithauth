@@ -1,6 +1,6 @@
 import Favourites from "./Favourites";
 
-const FavouritesPage = async () => {
+const FavouritesPage = () => {
   return <Favourites />;
 };
 
