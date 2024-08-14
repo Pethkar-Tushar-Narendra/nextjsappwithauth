@@ -22,7 +22,7 @@ const NavBar = () => {
       >
         <Link href={"/"}>{width >= 768 ? "Nextflix" : "N"}</Link>
       </p>
-      <div className="flex gap-2 item-center">
+      <div className="flex gap-2 item-center nav_bar_right_side">
         <p className="p-0 m-0 flex items-center">
           Welcome {username || "dev User"}
         </p>

@@ -66,7 +66,7 @@ const SearchBar = ({ fetch }) => {
         onChange={(e) => setValue(e?.target?.value || "")}
       />
       {open && (
-        <ul className="flex flex-col absolute bg-white text-black w-full search_menu mt-2">
+        <ul className="search_bar_container flex flex-col absolute bg-white text-black w-full search_menu mt-2">
           {data?.map((item) => {
             return (
               <li className="cursor-pointer hover:bg-gray-200 p-2">

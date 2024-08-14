@@ -29,6 +29,22 @@ input {
   width: 1.5rem;
   height: 1.5rem;
 }
+.nav_bar_right_side {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search_bar_container > li:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
+}
+.search_bar_container {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
 
 .navbar_tabs > button:hover {
   text-decoration-line: underline;
