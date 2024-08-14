@@ -31,7 +31,12 @@ const ProductCard = ({ item, fetch, watchlist, favourites, reRender }) => {
           No Poster
         </div>
       )}
-      <div className="flex gap-1 justify-start w-full flex-col items-between">
+      <div
+        className="flex gap-1 justify-start w-full flex-col items-between"
+        style={{
+          width: "150px",
+        }}
+      >
         <p className="max-w-full md:max-w-36 w-full	overflow-hidden text-ellipsis whitespace-nowrap">
           {fetch === "movie" ? item?.original_title : item?.original_name}
         </p>
