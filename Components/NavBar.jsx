@@ -16,7 +16,10 @@ const NavBar = () => {
 
   return (
     <div className="w-full p-4 bg-transparent  flex justify-between">
-      <p className="text-4xl font-bold text-red-500" id="title_icon">
+      <p
+        className="text-4xl font-bold text-red-500 logo_design"
+        id="title_icon"
+      >
         <Link href={"/"}>{width >= 768 ? "Nextflix" : "N"}</Link>
       </p>
       <div className="flex gap-2 item-center">
@@ -26,7 +29,7 @@ const NavBar = () => {
         {width < 768 ? (
           <div className="relative">
             <button
-              className="kabab-menu-button py-1  h-fit px-2 bg-gray-200 rounded-full"
+              className="kabab-menu-button py-1  h-fit px-2 bg-gray-200 rounded-full nav_kabab_menu"
               onClick={() => setToggleMenu((prev) => !prev)}
             >
               <svg
@@ -57,7 +60,7 @@ const NavBar = () => {
             )}
           </div>
         ) : (
-          <div className="flex gap-2 px-2">
+          <div className="flex gap-2 px-2 navbar_tabs">
             <button className="hover:underline">
               <Link href={"/watchlist"}>WatchList</Link>
             </button>

@@ -1,11 +1,9 @@
 "use client";
-import InputFields from "../../Components/InputFields";
-import { signIn, useSession } from "next-auth/react";
-import { useState } from "react";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
+import { useState } from "react";
+import InputFields from "../../Components/InputFields";
 const Login = () => {
-  const session = useSession();
-  console.log(session, "session created");
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [showError, setShowError] = useState("");

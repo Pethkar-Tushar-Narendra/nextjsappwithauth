@@ -6,6 +6,27 @@ input {
   border: 1px solid black;
 }
 
+.logo_design {
+  font-size: 34px;
+  color: #ef4444;
+}
+
+.nav_kabab_menu {
+  padding: 0.25rem 0.5rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
+  border-radius: 9999px;
+  cursor: pointer;
+}
+
+.navbar_tabs > button:hover {
+  text-decoration-line: underline;
+}
+.navbar_tabs {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
 .login_page_backDrop {
   background-image: url("../libs/images/nextflixBackgroundImage.jpg");
 }
