@@ -3,7 +3,7 @@
 import { useRouter } from "next/router";
 import Details from "../../../Components/Details";
 
-export default function movie() {
+export default function movieDetails() {
   const router = useRouter();
   const { id } = router.query;
 

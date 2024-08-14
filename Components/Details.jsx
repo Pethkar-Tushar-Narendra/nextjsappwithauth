@@ -41,7 +41,7 @@ const Details = ({ id, fetch }) => {
     if (session?.data?.user) {
       fetchData();
     }
-  }, [reRender, session]);
+  }, [reRender, session, id]);
 
   const video =
     data?.videos?.length === 1
