@@ -89,7 +89,7 @@ const HomeComponent = () => {
     if (session?.data) {
       fetchGenre();
     }
-  }, [fetch, session]);
+  }, [fetch, session, reRender]);
   const handlerCategoryChange = (e) => {
     if (e !== "upcoming" || fetch === "movie") {
       setCategory(e);

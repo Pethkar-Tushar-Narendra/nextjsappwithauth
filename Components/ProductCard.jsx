@@ -96,7 +96,9 @@ const ProductCard = ({ item, fetch, watchlist, favourites, reRender }) => {
                 item,
                 false,
                 true,
-                !presentInFavourites
+                undefined,
+                !presentInFavourites,
+                userName?.data?.user?.name
               );
               reRender((prev) => !prev);
             }}

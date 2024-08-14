@@ -35,16 +35,16 @@ export default async function handler(request, res) {
       } = request.body;
 
       const session = await getSession(authOptions);
-      console.log(session, "session created to server component");
 
       await connectMongoDB();
+      console.log("connect to db", session, user);
 
       if (review && user) {
         const newReview = new RatingAndReviews({
           user,
           rating,
           review,
-          userName: user.userName,
+          userName: user,
           movieId,
           fetch,
         });
@@ -54,7 +54,7 @@ export default async function handler(request, res) {
       }
       const updatedDocument = await Users.findOneAndUpdate(
         {
-          userName: session?.user?.name,
+          userName: user,
         },
         add
           ? {

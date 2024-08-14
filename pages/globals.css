@@ -11,6 +11,15 @@ input {
 .absolute {
   position: absolute;
 }
+.whitespace-nowrap {
+  white-space: nowrap;
+}
+.text-ellipsis {
+  text-overflow: ellipsis;
+}
+.overflow-hidden {
+  overflow: hidden;
+}
 .gap-1 {
   gap: 0.25rem;
 }
