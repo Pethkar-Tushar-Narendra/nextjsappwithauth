@@ -10,10 +10,9 @@ const ProductCard = ({ item, fetch, watchlist, favourites, reRender }) => {
   return (
     <>
       {item?.poster_path ? (
-        <div className="w-full h-full overflow-hidden flex items-center justify-center">
+        <div className="w-full h-full overflow-hidden flex items-center justify-center w-40	">
           <img
             style={{
-              width: "150px",
               height: "225px",
               cursor: "pointer",
             }}
@@ -23,20 +22,15 @@ const ProductCard = ({ item, fetch, watchlist, favourites, reRender }) => {
         </div>
       ) : (
         <div
+          className="w-40	"
           style={{
-            width: "150px",
             height: "225px",
           }}
         >
           No Poster
         </div>
       )}
-      <div
-        className="flex gap-1 justify-start w-full flex-col items-between"
-        style={{
-          width: "150px",
-        }}
-      >
+      <div className="flex gap-1 justify-start w-full flex-col items-between w-full md:w-40">
         <p className="max-w-full md:max-w-36 w-full	overflow-hidden text-ellipsis whitespace-nowrap">
           {fetch === "movie" ? item?.original_title : item?.original_name}
         </p>
