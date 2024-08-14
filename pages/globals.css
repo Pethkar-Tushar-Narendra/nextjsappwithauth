@@ -45,7 +45,12 @@ input {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
-
+.block {
+  display: block;
+}
+.hidden {
+  display: none;
+}
 .navbar_tabs > button:hover {
   text-decoration-line: underline;
 }
