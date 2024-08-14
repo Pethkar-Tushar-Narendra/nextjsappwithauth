@@ -57,7 +57,7 @@ const SearchBar = ({ fetch }) => {
     <div ref={wrapperRef} className="relative h-100">
       <InputFields
         placeholder={`Type ${fetch === "tv" ? "Tv Show" : "Movie"} name...`}
-        className="border-red border"
+        className="border-red border search_by_title"
         onFocus={() => {
           setOpen(true);
         }}
