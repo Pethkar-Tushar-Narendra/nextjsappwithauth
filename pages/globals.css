@@ -23,6 +23,9 @@ input {
 .w-40 {
   width: 10rem;
 }
+.bg-transparent {
+  background-color: transparent;
+}
 .gap-1 {
   gap: 0.25rem;
 }
