@@ -28,7 +28,8 @@
     "Components/ReviewCard.jsx",
     "Components/AddReview.jsx",
     "middleware.js",
-    "Components/Star.jsx"
+    "Components/Star.jsx",
+    "pages/tvTrailer/[id]/index.jsx"
   ],
   "exclude": ["node_modules"]
 }

@@ -18,7 +18,6 @@ import connectMongoDB from "../../libs/mongodb";
 import RatingAndReviews from "../../models/rating";
 import Users from "../../models/users";
 import { authOptions } from "./auth/[...nextauth].js";
-import { getServerSession } from "next-auth";
 
 export default async function handler(request, res) {
   if (request.method === "POST") {
