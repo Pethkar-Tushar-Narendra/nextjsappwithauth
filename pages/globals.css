@@ -11,6 +11,9 @@ input {
 .absolute {
   position: absolute;
 }
+.gap-1 {
+  gap: 0.25rem;
+}
 .logo_design {
   font-size: 34px;
   color: #ef4444;
