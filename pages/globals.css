@@ -5,12 +5,27 @@
 input {
   border: 1px solid black;
 }
-
+.relative {
+  position: relative;
+}
+.absolute {
+  position: absolute;
+}
 .logo_design {
   font-size: 34px;
   color: #ef4444;
 }
-
+.w-6 {
+  width: 1.5rem;
+}
+.bg-gray-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
+}
+.text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+}
 .search_by_title {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
@@ -34,7 +49,6 @@ input {
   align-items: center;
   justify-content: center;
 }
-
 .search_bar_container > li:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
