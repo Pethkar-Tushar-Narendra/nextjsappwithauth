@@ -8,7 +8,7 @@ const ProductCard = ({ item, fetch, watchlist, favourites, reRender }) => {
   const userName = useSession();
 
   return (
-    <>
+    <div className="max-w-full md:max-w-36">
       {item?.poster_path ? (
         <div className="w-full h-full overflow-hidden flex items-center justify-center w-40	">
           <img
@@ -164,7 +164,7 @@ const ProductCard = ({ item, fetch, watchlist, favourites, reRender }) => {
           </button>
         </div> */}
       </div>
-    </>
+    </div>
   );
 };
 
