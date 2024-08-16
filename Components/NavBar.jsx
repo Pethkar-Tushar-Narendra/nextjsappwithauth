@@ -20,13 +20,13 @@ const NavBar = () => {
         className="text-4xl font-bold text-red-500 logo_design"
         id="title_icon"
       >
-        <Link href={"/"}>{width >= 768 ? "Nextflix" : "N"}</Link>
+        <Link href={"/"}>{width >= 600 ? "Nextflix" : "N"}</Link>
       </p>
       <div className="flex gap-2 item-center nav_bar_right_side">
         <p className="p-0 m-0 flex items-center">
           Welcome {username || "dev User"}
         </p>
-        {width < 768 ? (
+        {width < 600 ? (
           <div className="relative">
             <button
               className="kabab-menu-button py-1  h-fit px-2 bg-gray-200 rounded-full nav_kabab_menu"

@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import NavBar from "../../Components/NavBar";
 import ProductCard from "../../Components/ProductCard";
 import SearchBar from "../../Components/SearchBar";
+import useWindowSize from "../../Components/useWindowSize";
 
 // interface movies {
 //   page: number;
@@ -46,6 +47,7 @@ const HomeComponent = () => {
         }
       : {};
   const session = useSession();
+  const { width } = useWindowSize();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -112,7 +114,11 @@ const HomeComponent = () => {
     <div className="w-screen h-screen overflow-x-hidden bg-gray-900 text-white">
       <NavBar />
       <div>
-        <div className="flex p-4 justify-between flex-col sm:flex-col md:flex-row gap-2">
+        <div
+          className={`flex p-4 justify-between flex-col ${
+            width < 600 ? "flex-col" : "flex-row"
+          } gap-2`}
+        >
           <div className="flex gap-2">
             <button
               className={`border border-white p-2 rounded hover:bg-red-500 ${
@@ -141,7 +147,9 @@ const HomeComponent = () => {
               TV Shows
             </button>
           </div>
-          <div className="flex gap-2 flex-col md:flex-row">
+          <div
+            className={`flex gap-2 ${width < 600 ? "flex-col" : "flex-row"}`}
+          >
             <div className="flex gap-2">
               <button
                 className={`border border-white p-2 rounded hover:bg-red-500 ${
@@ -233,7 +241,9 @@ const HomeComponent = () => {
             {data?.results?.map((item, i) => (
               <Link
                 href={`/${fetch}/${item.id}`}
-                className="bg-gray-700 shadow-lg rounded p-4 flex gap-2 flex-col w-full md:w-fit justify-center items-center text-white overflow-hidden"
+                className={`bg-gray-700 shadow-lg rounded p-4 flex gap-2 flex-col ${
+                  width < 600 ? "w-full" : "w-fit"
+                } justify-center items-center text-white overflow-hidden`}
               >
                 <ProductCard
                   fetch={fetch}

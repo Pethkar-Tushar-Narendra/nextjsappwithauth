@@ -5,11 +5,12 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import NavBar from "../../Components/NavBar";
 import ProductCard from "../../Components/ProductCard";
+import useWindowSize from "../../Components/useWindowSize";
 
 const Favourites = () => {
   const [data, setData] = useState([{ id: 0 }]);
   const [reRender, setReRender] = useState(true);
-
+  const { width } = useWindowSize();
   const session = useSession();
   useEffect(() => {
     const postData = async () => {
@@ -42,7 +43,9 @@ const Favourites = () => {
         {unqueArray?.map((item, i) => (
           <Link
             href={`/${fetch}/${item.id}`}
-            className="bg-gray-700 shadow-lg rounded p-4 flex gap-2 flex-col w-full md:w-fit justify-center items-center text-white overflow-hidden"
+            className={`bg-gray-700 shadow-lg rounded p-4 flex gap-2 flex-col ${
+              width < 600 ? "w-full" : "w-fit"
+            } justify-center items-center text-white overflow-hidden`}
           >
             <ProductCard
               fetch={"movie"}
