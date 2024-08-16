@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import YouTube from "react-youtube";
+import useWindowSize from "./useWindowSize";
 
 const YoutubePlayer = ({ videoId, searchParams }) => {
   const opts = {
@@ -12,6 +13,7 @@ const YoutubePlayer = ({ videoId, searchParams }) => {
       controls: 0,
     },
   };
+  const { width } = useWindowSize();
 
   const onReady = (event) => {
     event.target.playVideo();

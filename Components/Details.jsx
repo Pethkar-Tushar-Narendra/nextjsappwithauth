@@ -57,7 +57,6 @@ const Details = ({ id, fetch }) => {
   const { watchList, favourites, ...item } = data;
   const presentInWatchList = watchList?.find((ele) => ele.id === item?.id);
   const presentInFavourites = favourites?.find((ele) => ele.id === item?.id);
-  const screenWidth = width > 1200;
 
   return (
     <div className=" w-screen h-screen overflow-x-hidden bg-gray-900 text-white">
@@ -67,7 +66,7 @@ const Details = ({ id, fetch }) => {
           width < 1200 ? "justify-start" : "justify-between"
         }  ${width < 1200 ? "items-start" : "items-center"} px-4 py-2 gap-2`}
       >
-        {screenWidth && (
+        {width >= 1200 && (
           <ShowDetails
             data={data}
             fetch={fetch}
@@ -117,7 +116,7 @@ const Details = ({ id, fetch }) => {
             </svg>
           )}
         </Link>
-        {!screenWidth && (
+        {width < 1200 && (
           <ShowDetails
             data={data}
             fetch={fetch}
