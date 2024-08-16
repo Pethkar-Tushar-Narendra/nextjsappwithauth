@@ -109,13 +109,14 @@ const HomeComponent = () => {
     setCategory("");
     setPage(1);
   };
+  console.log(width, "width");
 
   return (
     <div className="w-screen h-screen overflow-x-hidden bg-gray-900 text-white">
       <NavBar />
       <div>
         <div
-          className={`flex p-4 justify-between flex-col ${
+          className={`flex p-4 justify-between  ${
             width < 600 ? "flex-col" : "flex-row"
           } gap-2`}
         >
