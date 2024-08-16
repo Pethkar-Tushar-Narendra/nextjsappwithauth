@@ -29,7 +29,9 @@
     "Components/AddReview.jsx",
     "middleware.js",
     "Components/Star.jsx",
-    "pages/tvTrailer/[id]/index.jsx"
+    "pages/tvTrailer/[id]/index.jsx",
+    "pages/watchlist/WatchList.jsx",
+    "pages/watchlist/index.jsx"
   ],
   "exclude": ["node_modules"]
 }

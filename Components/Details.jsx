@@ -83,7 +83,7 @@ const Details = ({ id, fetch }) => {
               : `/tvTrailer/${video?.key}?movieDetails=/${fetch}/${id}`
           }
           className={`${width < 1200 ? "mb-2" : "mb-0"} ${
-            width < 1200 ? "w-full" : "w-7/12"
+            width < 1200 ? "w-full" : "w-7/12 image_container"
           } h-fit bg-contain bg-no-repeat bg-center bg-start flex items-center justify-center ${
             video?.key && "cursor-pointer"
           } relative ${width > 1200 && "overflow-hidden"}`}

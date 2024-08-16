@@ -8,20 +8,6 @@ import ProductCard from "../../Components/ProductCard";
 import SearchBar from "../../Components/SearchBar";
 import useWindowSize from "../../Components/useWindowSize";
 
-// interface movies {
-//   page: number;
-//   results: [];
-//   total_pages: number;
-//   total_results: number;
-//   watchList: [{ id: number }];
-//   favourites: [{ id: number }];
-// }
-
-// interface genres {
-//   id: number;
-//   name: string;
-// }
-
 const HomeComponent = () => {
   const [data, setData] = useState({
     page: 0,
@@ -109,7 +95,6 @@ const HomeComponent = () => {
     setCategory("");
     setPage(1);
   };
-  console.log(width, "width");
 
   return (
     <div className="w-screen h-screen overflow-x-hidden bg-gray-900 text-white">
