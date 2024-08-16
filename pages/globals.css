@@ -14,6 +14,14 @@ input {
 .gap-3 {
   gap: 0.75rem;
 }
+.image_animation {
+  transform: none;
+  transition-property: transform;
+  transition-duration: 500ms;
+}
+.image_animation:hover {
+  transform: scale(1.1);
+}
 .items-end {
   align-items: flex-end;
 }
