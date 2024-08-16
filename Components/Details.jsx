@@ -62,7 +62,11 @@ const Details = ({ id, fetch }) => {
   return (
     <div className=" w-screen h-screen overflow-x-hidden bg-gray-900 text-white">
       <NavBar />
-      <div className="flex flex-col lg:flex-row lg:justify-between justify-start items-start lg:items-center px-4 py-2 gap-2">
+      <div
+        className={`flex ${width < 1200 ? "flex-col" : "flex-row"} ${
+          width < 1200 ? "justify-start" : "justify-between"
+        }  ${width < 1200 ? "items-start" : "items-center"} px-4 py-2 gap-2`}
+      >
         {screenWidth && (
           <ShowDetails
             data={data}
@@ -79,9 +83,11 @@ const Details = ({ id, fetch }) => {
               ? `/movieTrailer/${video?.key}?movieDetails=/${fetch}/${id}`
               : `/tvTrailer/${video?.key}?movieDetails=/${fetch}/${id}`
           }
-          className={`mb-2 lg:mb-0 w-full lg:w-7/12 h-fit bg-contain bg-no-repeat bg-center bg-start flex items-center justify-center ${
+          className={`${width < 1200 ? "mb-2" : "mb-0"} ${
+            width < 1200 ? "w-full" : "w-7/12"
+          } h-fit bg-contain bg-no-repeat bg-center bg-start flex items-center justify-center ${
             video?.key && "cursor-pointer"
-          } relative lg:overflow-hidden`}
+          } relative ${width > 1200 && "overflow-hidden"}`}
         >
           <img
             src={`https://image.tmdb.org/t/p/original${data?.backdrop_path})`}
@@ -150,7 +156,9 @@ const Details = ({ id, fetch }) => {
           <Link
             key={i}
             href={`/${fetch}/${item.id}`}
-            className={`bg-gray-700 shadow-lg rounded p-4 flex gap-2 flex-col ${width<600?'w-full': 'w-fit'} justify-center items-center text-white overflow-hidden`}
+            className={`bg-gray-700 shadow-lg rounded p-4 flex gap-2 flex-col ${
+              width < 600 ? "w-full" : "w-fit"
+            } justify-center items-center text-white overflow-hidden`}
           >
             <ProductCard
               fetch={fetch}

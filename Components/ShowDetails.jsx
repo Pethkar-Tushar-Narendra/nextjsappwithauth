@@ -1,6 +1,7 @@
 import React from "react";
 import Star from "./Star";
 import { addWatchListHandler } from "./ApiCallingFunctions";
+import useWindowSize from "./useWindowSize";
 
 const ShowDetails = ({
   data,
@@ -10,8 +11,15 @@ const ShowDetails = ({
   setReRender,
   presentInWatchList,
 }) => {
+  const { width } = useWindowSize();
   return (
-    <div className="lg:w-5/12 flex flex-col justify-start items-start h-full lg:py-8 gap-2">
+    <div
+      className={`${
+        width > 1200 && "w-5/12"
+      } flex flex-col justify-start items-start h-full ${
+        width > 1200 && "py-8"
+      } gap-2`}
+    >
       <div className="flex gap-3 items-end">
         <p className="text-3xl font-bold text-white shadow-lg">
           {data?.title || data?.original_name}

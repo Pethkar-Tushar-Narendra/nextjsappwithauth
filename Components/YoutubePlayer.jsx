@@ -40,7 +40,9 @@ const YoutubePlayer = ({ videoId, searchParams }) => {
       )}
       <Link
         href={searchParams || "/"}
-        className="absolute top-30 right-10 lg:top-20 lg:right-10 cursor-pointer z-99999"
+        className={`absolute top-30 right-10 ${
+          width > 1200 && "top-20"
+        } cursor-pointer z-99999`}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
