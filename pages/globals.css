@@ -78,6 +78,10 @@ input {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
 .px-4 {
   padding-left: 1rem;
   padding-right: 1rem;
@@ -118,6 +122,12 @@ input {
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
   border-radius: 9999px;
   cursor: pointer;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+.z-99999 {
+  z-index: 999999;
 }
 .nav_kabab_menu_button {
   width: 1.5rem;
