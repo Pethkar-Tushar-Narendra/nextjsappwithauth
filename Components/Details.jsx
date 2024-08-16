@@ -91,7 +91,7 @@ const Details = ({ id, fetch }) => {
           <img
             src={`https://image.tmdb.org/t/p/original${data?.backdrop_path})`}
             alt=""
-            className="transform transition-transform duration-500 hover:scale-110"
+            className="image_animation transform transition-transform duration-500 hover:scale-110"
           />
           {data?.backdrop_path && video?.key && (
             <svg
