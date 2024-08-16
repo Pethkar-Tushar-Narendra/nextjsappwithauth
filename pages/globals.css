@@ -31,6 +31,9 @@ input {
 .image_container {
   width: 58.333333%;
 }
+details_container {
+  width: 41.666667%;
+}
 .items-end {
   align-items: flex-end;
 }
