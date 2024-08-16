@@ -15,7 +15,7 @@ const ShowDetails = ({
   return (
     <div
       className={`${
-        width > 1200 && "w-5/12"
+        width > 1200 && "w-5/12 details_container"
       } flex flex-col justify-start items-start h-full ${
         width > 1200 && "py-8"
       } gap-2`}
