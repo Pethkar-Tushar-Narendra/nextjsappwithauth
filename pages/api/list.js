@@ -22,36 +22,20 @@ import { authOptions } from "./auth/[...nextauth].js";
 export default async function handler(request, res) {
   if (request.method === "POST") {
     try {
-      const {
-        item,
-        watchlist,
-        favourite,
-        add,
-        review,
-        user,
-        rating,
-        movieId,
-        fetch,
-      } = request.body;
+      const { item, watchlist, favourite, add, user } = request.body;
 
       const session = await getSession(authOptions);
 
       await connectMongoDB();
-      console.log("connect to db", session, user);
+      console.log(
+        item,
+        watchlist,
+        favourite,
+        add,
+        user,
+        "adding to watchlist params"
+      );
 
-      if (review && user) {
-        const newReview = new RatingAndReviews({
-          user,
-          rating,
-          review,
-          userName: user,
-          movieId,
-          fetch,
-        });
-        const userReviews = await newReview.save();
-
-        return res.json(userReviews, { status: 201 });
-      }
       const updatedDocument = await Users.findOneAndUpdate(
         {
           userName: user,
