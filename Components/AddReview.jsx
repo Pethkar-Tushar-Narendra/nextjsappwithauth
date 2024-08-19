@@ -1,32 +1,24 @@
 import { useState } from "react";
-import { addWatchListHandler } from "./ApiCallingFunctions";
+import { addReview, addWatchListHandler } from "./ApiCallingFunctions";
 
-const AddReview = ({ id, fetch }) => {
+const AddReview = ({ id, fetch, setReRender }) => {
   const [review, setReview] = useState("");
   const [rating, setRating] = useState("");
 
   const onSubmit = async (e) => {
     e.preventDefault();
     let user;
+
     try {
       if (localStorage?.getItem("user")) {
         user = JSON.parse(localStorage.getItem("user") || "");
       } else {
         throw new Error("user not available.");
       }
-      await addWatchListHandler(
-        {},
-        false,
-        false,
-        false,
-        review,
-        user,
-        5,
-        id,
-        fetch
-      );
+      await addReview(review, user, rating, id, fetch, user?.userName);
       setRating("");
       setReview("");
+      setReRender((prev) => !prev);
     } catch (error) {
       console.log("error detected", error);
     }

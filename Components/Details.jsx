@@ -57,6 +57,7 @@ const Details = ({ id, fetch }) => {
   const { watchList, favourites, ...item } = data;
   const presentInWatchList = watchList?.find((ele) => ele.id === item?.id);
   const presentInFavourites = favourites?.find((ele) => ele.id === item?.id);
+  console.log(data, "data after review entered");
 
   return (
     <div className=" w-screen h-screen overflow-x-hidden bg-gray-900 text-white">
@@ -170,7 +171,7 @@ const Details = ({ id, fetch }) => {
           </Link>
         ))}
       </div>
-      <AddReview id={id} fetch={fetch} />
+      <AddReview id={id} fetch={fetch} setReRender={setReRender} />
       {(movieReviews || userReviews) &&
         movieReviews?.length + userReviews?.length > 0 && (
           <div className="p-4 flex flex-col border-t-2 border-red-900">

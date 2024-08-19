@@ -1,19 +1,29 @@
 import { getSession } from "next-auth/react";
 import connectMongoDB from "../../libs/mongodb";
 import { authOptions } from "./auth/[...nextauth]";
+import RatingAndReviews from "../../models/rating";
 
 export default async function handler(request, res) {
   if (request.method === "POST") {
     try {
-      const { review, user, rating, movieId, fetch } = request.body;
+      const { review, user, rating, movieId, fetch, userName } = request.body;
       const session = await getSession(authOptions);
+      console.log(
+        review,
+        user,
+        rating,
+        movieId,
+        fetch,
+        userName,
+        "review adding api"
+      );
 
       await connectMongoDB();
       if (review && user) {
         const newReview = new RatingAndReviews({
           user,
-          rating,
           review,
+          rating,
           userName: user,
           movieId,
           fetch,

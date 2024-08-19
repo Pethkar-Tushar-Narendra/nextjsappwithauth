@@ -6,14 +6,6 @@ import useWindowSize from "./useWindowSize";
 const ProductCard = ({ item, fetch, watchlist, favourites, reRender }) => {
   const presentInWatchList = watchlist?.find((ele) => ele.id === item.id);
   const presentInFavourites = favourites?.find((ele) => ele.id === item.id);
-
-  console.log(
-    favourites,
-    watchlist,
-    presentInFavourites,
-    presentInWatchList,
-    "favourites"
-  );
   const userName = useSession();
   const { width } = useWindowSize();
 
