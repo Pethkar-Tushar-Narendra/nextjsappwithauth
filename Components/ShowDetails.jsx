@@ -2,6 +2,7 @@ import React from "react";
 import Star from "./Star";
 import { addWatchListHandler } from "./ApiCallingFunctions";
 import useWindowSize from "./useWindowSize";
+import { useSession } from "next-auth/react";
 
 const ShowDetails = ({
   data,
@@ -12,6 +13,9 @@ const ShowDetails = ({
   presentInWatchList,
 }) => {
   const { width } = useWindowSize();
+  const userName = useSession();
+  console.log(userName?.data?.user?.name, "username");
+
   return (
     <div
       className={`${
@@ -38,10 +42,11 @@ const ShowDetails = ({
           onClick={async (e) => {
             e.preventDefault();
             await addWatchListHandler(
-              { ...item },
+              item,
               true,
               false,
-              !presentInWatchList
+              !presentInWatchList,
+              userName?.data?.user?.name
             );
             setReRender((prev) => !prev);
           }}
@@ -53,10 +58,11 @@ const ShowDetails = ({
           onClick={async (e) => {
             e.preventDefault();
             await addWatchListHandler(
-              { ...item },
+              item,
               false,
               true,
-              !presentInFavourites
+              !presentInFavourites,
+              userName?.data?.user?.name
             );
             setReRender((prev) => !prev);
           }}
