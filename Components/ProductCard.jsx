@@ -58,7 +58,8 @@ const ProductCard = ({ item, fetch, watchlist, favourites, reRender }) => {
                 true,
                 false,
                 !presentInWatchList,
-                userName?.data?.user?.name
+                userName?.data?.user?.name,
+                fetch
               );
               reRender((prev) => !prev);
             }}
@@ -105,7 +106,8 @@ const ProductCard = ({ item, fetch, watchlist, favourites, reRender }) => {
                 false,
                 true,
                 !presentInFavourites,
-                userName?.data?.user?.name
+                userName?.data?.user?.name,
+                fetch
               );
               reRender((prev) => !prev);
             }}
@@ -144,33 +146,6 @@ const ProductCard = ({ item, fetch, watchlist, favourites, reRender }) => {
             </svg>
           </button>
         </div>
-        {/* <div className="flex gap-2">
-          <button
-            className="border border-black p-1"
-            onClick={async (e) => {
-              e.preventDefault();
-              await addWatchListHandler(item, true, false, !presentInWatchList);
-              reRender((prev: boolean) => !prev);
-            }}
-          >
-            {!presentInWatchList ? "Add to" : "Remove from"} Watchlist
-          </button>
-          <button
-            className="border border-black p-1"
-            onClick={async (e) => {
-              e.preventDefault();
-              await addWatchListHandler(
-                item,
-                false,
-                true,
-                !presentInFavourites
-              );
-              reRender((prev: boolean) => !prev);
-            }}
-          >
-            {!presentInFavourites ? "Add to" : "Remove from"} Favourites
-          </button>
-        </div> */}
       </div>
     </>
   );

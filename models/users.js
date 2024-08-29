@@ -5,8 +5,8 @@ const usersSchema = new Schema(
     userName: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    watchlist: { type: [] },
-    favourites: { type: [] },
+    watchlist: { type: [{ item: { type: {} }, fetch: { type: String } }] },
+    favourites: { type: [{ item: { type: {} }, fetch: { type: String } }] },
   },
   {
     timestamps: true,

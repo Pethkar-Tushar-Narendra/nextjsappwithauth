@@ -29,7 +29,8 @@ export const addWatchListHandler = async (
   watchList,
   favourite,
   add,
-  user
+  user,
+  fetch
 ) => {
   try {
     const response = await axios.post("/api/list", {
@@ -38,6 +39,7 @@ export const addWatchListHandler = async (
       favourite: favourite,
       add: add,
       user,
+      fetch,
     });
   } catch (error) {
     console.log(error, "error");

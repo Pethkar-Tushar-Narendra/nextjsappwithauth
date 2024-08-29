@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { addReview, addWatchListHandler } from "./ApiCallingFunctions";
+import { addReview } from "./ApiCallingFunctions";
 
 const AddReview = ({ id, fetch, setReRender }) => {
   const [review, setReview] = useState("");

@@ -14,7 +14,11 @@ const ShowDetails = ({
 }) => {
   const { width } = useWindowSize();
   const userName = useSession();
-  console.log(userName?.data?.user?.name, "username");
+  console.log(
+    presentInFavourites,
+    presentInWatchList,
+    "presentInFavourites,presentInWatchList"
+  );
 
   return (
     <div
@@ -46,7 +50,8 @@ const ShowDetails = ({
               true,
               false,
               !presentInWatchList,
-              userName?.data?.user?.name
+              userName?.data?.user?.name,
+              fetch
             );
             setReRender((prev) => !prev);
           }}
@@ -62,7 +67,8 @@ const ShowDetails = ({
               false,
               true,
               !presentInFavourites,
-              userName?.data?.user?.name
+              userName?.data?.user?.name,
+              fetch
             );
             setReRender((prev) => !prev);
           }}

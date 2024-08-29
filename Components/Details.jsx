@@ -55,9 +55,12 @@ const Details = ({ id, fetch }) => {
   let userReviews = data?.userReviews || [];
 
   const { watchList, favourites, ...item } = data;
-  const presentInWatchList = watchList?.find((ele) => ele.id === item?.id);
-  const presentInFavourites = favourites?.find((ele) => ele.id === item?.id);
-  console.log(data, "data after review entered");
+  const presentInWatchList = watchList?.find(
+    (ele) => ele?.item?.id === item?.id
+  );
+  const presentInFavourites = favourites?.find(
+    (ele) => ele?.item?.id === item?.id
+  );
 
   return (
     <div className=" w-screen h-screen overflow-x-hidden bg-gray-900 text-white">

@@ -29,34 +29,33 @@ const WatchList = () => {
     }
   }, [reRender, session]);
 
-  const unqueArray = [
-    ...new Map(
-      data?.filter((item) => item.id).map((item) => [item.id, item])
-    ).values(),
-  ];
+  const unqueArray = [...data?.filter((ele) => ele?.item?.id > 0)];
 
   return (
     <div className="w-screen h-screen overflow-x-hidden bg-gray-900 text-white">
       <NavBar />
       <div className=" p-4 w-full text-white flex flex-wrap justify-center items-center gap-2 mt-2">
         <p className="w-full">WatchList</p>
-        {unqueArray?.map((item, i) => (
-          <Link
-            href={`/${fetch}/${item.id}`}
-            className={`bg-gray-700 shadow-lg rounded p-4 flex gap-2 flex-col ${
-              width < 600 ? "w-full" : "w-fit"
-            } justify-center items-center text-white overflow-hidden`}
-          >
-            <ProductCard
-              fetch={"movie"}
-              item={item}
-              reRender={setReRender}
-              key={i}
-              watchlist={[...unqueArray] || []}
-              favourites={data?.favourites || []}
-            />
-          </Link>
-        ))}
+        {unqueArray?.map((element, i) => {
+          const item = element?.item;
+          return (
+            <Link
+              href={`/${element.fetch}/${item.id}`}
+              className={`bg-gray-700 shadow-lg rounded p-4 flex gap-2 flex-col ${
+                width < 600 ? "w-full" : "w-fit"
+              } justify-center items-center text-white overflow-hidden`}
+            >
+              <ProductCard
+                fetch={element.fetch}
+                item={item}
+                reRender={setReRender}
+                key={i}
+                watchlist={[...unqueArray] || []}
+                favourites={data?.favourites || []}
+              />
+            </Link>
+          );
+        })}
       </div>
     </div>
   );

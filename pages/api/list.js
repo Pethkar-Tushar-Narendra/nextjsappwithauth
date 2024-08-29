@@ -22,19 +22,11 @@ import { authOptions } from "./auth/[...nextauth].js";
 export default async function handler(request, res) {
   if (request.method === "POST") {
     try {
-      const { item, watchlist, favourite, add, user } = request.body;
+      const { item, watchlist, favourite, add, user, fetch } = request.body;
 
       const session = await getSession(authOptions);
 
       await connectMongoDB();
-      console.log(
-        item,
-        watchlist,
-        favourite,
-        add,
-        user,
-        "adding to watchlist params"
-      );
 
       const updatedDocument = await Users.findOneAndUpdate(
         {
@@ -43,10 +35,10 @@ export default async function handler(request, res) {
         add
           ? {
               $push: watchlist
-                ? { watchlist: { ...item } }
+                ? { watchlist: { item: { ...item }, fetch } }
                 : favourite
                 ? {
-                    favourites: { ...item },
+                    favourites: { item: { ...item }, fetch },
                   }
                 : {},
             }
@@ -54,9 +46,7 @@ export default async function handler(request, res) {
               $pull: watchlist
                 ? { watchlist: { id: item.id } }
                 : favourite
-                ? {
-                    favourites: { id: item.id },
-                  }
+                ? { favourite: { id: item.id } }
                 : {},
             },
         {
