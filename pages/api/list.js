@@ -44,14 +44,18 @@ export default async function handler(request, res) {
             }
           : {
               $pull: watchlist
-                ? { watchlist: { id: item.id } }
+                ? { watchlist: { item: { id: { $eq: item.id } } } }
                 : favourite
-                ? { favourite: { id: item.id } }
+                ? { favourites: { item: { id: { $eq: item.id } } } }
                 : {},
             },
-        {
-          new: true,
-        }
+        add
+          ? {
+              new: true,
+            }
+          : {
+              multi: true,
+            }
       );
 
       if (!updatedDocument) {
