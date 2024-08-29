@@ -7,7 +7,6 @@ export default async function handler(request, res) {
   if (request.method === "POST") {
     try {
       const { review, user, rating, movieId, fetch, userName } = request.body;
-      const session = await getSession(authOptions);
       console.log(
         review,
         user,
@@ -24,7 +23,7 @@ export default async function handler(request, res) {
           user,
           review,
           rating,
-          userName: user,
+          userName,
           movieId,
           fetch,
         });

@@ -53,6 +53,7 @@ const Details = ({ id, fetch }) => {
   const recommendedMovies = data?.recommendedMovies || [];
   const movieReviews = data?.reviews || [];
   let userReviews = data?.userReviews || [];
+  console.log(userReviews, "users");
 
   const { watchList, favourites, ...item } = data;
   const presentInWatchList = watchList?.find(
@@ -61,7 +62,7 @@ const Details = ({ id, fetch }) => {
   const presentInFavourites = favourites?.find(
     (ele) => ele?.item?.id === item?.id
   );
-
+  console.log("Something");
   return (
     <div className=" w-screen h-screen overflow-x-hidden bg-gray-900 text-white">
       <NavBar />
