@@ -10,7 +10,6 @@ const ProductCard = ({ item, fetch, watchlist, favourites, reRender }) => {
   const presentInFavourites = favourites?.find(
     (ele) => ele?.item?.id === item.id
   );
-  console.log(presentInFavourites, presentInWatchList, "watchlist favourites");
   const userName = useSession();
   const { width } = useWindowSize();
 
