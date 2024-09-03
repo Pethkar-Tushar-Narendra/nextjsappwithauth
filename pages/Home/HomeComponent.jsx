@@ -96,6 +96,8 @@ const HomeComponent = () => {
     setPage(1);
   };
 
+  console.log(data, "data of home component");
+
   return (
     <div className="w-screen h-screen overflow-x-hidden bg-gray-900 text-white">
       <NavBar />

@@ -4,8 +4,13 @@ import { useSession } from "next-auth/react";
 import useWindowSize from "./useWindowSize";
 
 const ProductCard = ({ item, fetch, watchlist, favourites, reRender }) => {
-  const presentInWatchList = watchlist?.find((ele) => ele.id === item.id);
-  const presentInFavourites = favourites?.find((ele) => ele.id === item.id);
+  const presentInWatchList = watchlist?.find(
+    (ele) => ele?.item?.id === item.id
+  );
+  const presentInFavourites = favourites?.find(
+    (ele) => ele?.item?.id === item.id
+  );
+  console.log(presentInFavourites, presentInWatchList, "watchlist favourites");
   const userName = useSession();
   const { width } = useWindowSize();
 
