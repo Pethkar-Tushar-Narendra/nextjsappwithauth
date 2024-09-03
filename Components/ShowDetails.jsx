@@ -14,11 +14,6 @@ const ShowDetails = ({
 }) => {
   const { width } = useWindowSize();
   const userName = useSession();
-  console.log(
-    presentInFavourites,
-    presentInWatchList,
-    "presentInFavourites,presentInWatchList"
-  );
 
   return (
     <div

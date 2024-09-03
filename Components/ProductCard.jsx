@@ -20,6 +20,7 @@ const ProductCard = ({ item, fetch, watchlist, favourites, reRender }) => {
             }}
             className="image_animation"
             src={`https://image.tmdb.org/t/p/w500${item?.poster_path}`}
+            alt="No Poster"
           />
         </div>
       ) : (

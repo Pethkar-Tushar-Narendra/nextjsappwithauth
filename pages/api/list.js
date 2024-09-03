@@ -27,36 +27,79 @@ export default async function handler(request, res) {
       const session = await getSession(authOptions);
 
       await connectMongoDB();
+      var updatedDocument;
 
-      const updatedDocument = await Users.findOneAndUpdate(
-        {
-          userName: user,
-        },
-        add
-          ? {
-              $push: watchlist
-                ? { watchlist: { item: { ...item }, fetch } }
-                : favourite
-                ? {
-                    favourites: { item: { ...item }, fetch },
-                  }
-                : {},
-            }
-          : {
-              $pull: watchlist
-                ? { watchlist: { item: { id: { $eq: item.id } } } }
-                : favourite
-                ? { favourites: { item: { id: { $eq: item.id } } } }
-                : {},
-            },
-        add
-          ? {
-              new: true,
-            }
-          : {
-              multi: true,
-            }
-      );
+      if (!add) {
+        const document = await Users.findOne({ userName: user });
+        const favourites = favourite
+          ? document.favourites?.filter(
+              (favourite) => favourite?.item?.id !== item?.id
+            )
+          : document?.favourites;
+        const watchlists = watchlist
+          ? document.watchlist?.filter(
+              (watchlistElement) => watchlistElement?.item?.id !== item?.id
+            )
+          : document?.watchlist;
+
+        updatedDocument = await Users.updateOne(
+          { userName: user },
+          { $set: { watchlist: watchlists, favourites: favourites } }
+        );
+        console.log(
+          user,
+          watchlist,
+          favourites,
+          "watchlist and favourites done updating"
+        );
+      } else {
+        updatedDocument = await Users.findOneAndUpdate(
+          {
+            userName: user,
+          },
+          {
+            $push: watchlist
+              ? { watchlist: { item: { ...item }, fetch } }
+              : favourite
+              ? {
+                  favourites: { item: { ...item }, fetch },
+                }
+              : {},
+          },
+          {
+            new: true,
+          }
+        );
+      }
+      // const updatedDocument = await Users.findOneAndUpdate(
+      //   {
+      //     userName: user,
+      //   },
+      //   add
+      //     ? {
+      //         $push: watchlist
+      //           ? { watchlist: { item: { ...item }, fetch } }
+      //           : favourite
+      //           ? {
+      //               favourites: { item: { ...item }, fetch },
+      //             }
+      //           : {},
+      //       }
+      //     : {
+      //         $pull: watchlist
+      //           ? { "watchlist.$.item": { id: item.id } }
+      //           : favourite
+      //           ? { "favourites.$.item": { id: item.id } }
+      //           : {},
+      //       },
+      //   add
+      //     ? {
+      //         new: true,
+      //       }
+      //     : {
+      //         multi: true,
+      //       }
+      // );
 
       if (!updatedDocument) {
         throw new Error("Cannot find user.");
@@ -81,7 +124,6 @@ export default async function handler(request, res) {
       watchList = [...userObject?.watchlist];
       favourites = [...userObject?.favourites];
     } catch (error) {
-      console.log(userObject, watchList, favourites);
       return res.json({ error }, { status: 201 });
     }
 
@@ -120,7 +162,6 @@ export default async function handler(request, res) {
         return res.json({ error: e }, { status: 201 });
       }
     } else {
-      console.log("running something", Object.keys(searchParams).length);
       if (Object.keys(searchParams).length === 3) {
         try {
           const response = await getAll(searchParams["fetch"] || "movie", page);

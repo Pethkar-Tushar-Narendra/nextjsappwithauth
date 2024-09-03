@@ -1,6 +1,7 @@
 "use client";
 
 import axios from "axios";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import AddReview from "./AddReview";
@@ -9,7 +10,6 @@ import ProductCard from "./ProductCard";
 import ReviewCard from "./ReviewCard";
 import ShowDetails from "./ShowDetails";
 import useWindowSize from "./useWindowSize";
-import { useSession } from "next-auth/react";
 
 const Details = ({ id, fetch }) => {
   const [data, setData] = useState({

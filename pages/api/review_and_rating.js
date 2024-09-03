@@ -7,15 +7,6 @@ export default async function handler(request, res) {
   if (request.method === "POST") {
     try {
       const { review, user, rating, movieId, fetch, userName } = request.body;
-      console.log(
-        review,
-        user,
-        rating,
-        movieId,
-        fetch,
-        userName,
-        "review adding api"
-      );
 
       await connectMongoDB();
       if (review && user) {
