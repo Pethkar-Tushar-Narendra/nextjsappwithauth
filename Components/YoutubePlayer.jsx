@@ -10,7 +10,7 @@ const YoutubePlayer = ({ videoId, searchParams }) => {
     playerVars: {
       // https://developers.google.com/youtube/player_parameters
       autoplay: 1,
-      controls: 0,
+      controls: 1,
     },
   };
   const { width } = useWindowSize();

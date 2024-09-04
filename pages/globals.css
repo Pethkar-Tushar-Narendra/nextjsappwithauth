@@ -299,3 +299,7 @@ input:focus {
   background-color: #e0e0e0;
   border: 1px solid #bbb;
 }
+
+.border-t-2 {
+  border-top-width: 2px;
+}
