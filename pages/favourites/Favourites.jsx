@@ -12,7 +12,6 @@ const Favourites = () => {
   const [reRender, setReRender] = useState(true);
   const { width } = useWindowSize();
   const session = useSession();
-  console.log(data);
 
   useEffect(() => {
     const postData = async () => {
@@ -48,7 +47,7 @@ const Favourites = () => {
               } justify-center items-center text-white overflow-hidden`}
             >
               <ProductCard
-                fetch={"movie"}
+                fetch={element?.fetch || "movie"}
                 item={item}
                 reRender={setReRender}
                 key={i}
